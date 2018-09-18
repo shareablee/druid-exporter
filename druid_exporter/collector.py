@@ -54,6 +54,7 @@ SEGMENT_USED_METRIC = {
 
 INGEST_METRIC = {
     'labels': ['dataSource'],
+    'type': 'counter',
 }
 
 INGEST_TIME_METRIC = {
@@ -272,6 +273,8 @@ class DruidCollector(object):
         label_values = tuple([datapoint[label_name] for label_name in metric_labels])
 
         if '_metric_' not in config:
+            if metric_type == 'counter':
+                config['_metric_'] = Counter(metric_name, metric_name, metric_labels)
             if metric_type == 'gauge':
                 config['_metric_'] = Gauge(metric_name, metric_name, metric_labels)
             elif metric_type == 'summary':
@@ -284,6 +287,8 @@ class DruidCollector(object):
         if len(metric_labels) > 0:
             metric = metric.labels(*label_values)
 
+        if metric_type == 'counter':
+            metric.inc(metric_value)
         if metric_type == 'gauge':
             metric.set(metric_value)
         elif metric_type == 'summary':
