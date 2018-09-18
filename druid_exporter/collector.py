@@ -157,9 +157,11 @@ INGEST_METRICS = {
     'ingest/handoff/count': {**INGEST_METRIC},
     'ingest/handoff/failed': {**INGEST_METRIC},
     'ingest/kafka/lag': {**INGEST_METRIC, 'suffix': '_size'},
+    'ingest/merge/cpu': {**SKIP_METRIC},
     'ingest/merge/time': {**INGEST_TIME_METRIC},
     'ingest/persists/backPressure': {**INGEST_TIME_METRIC},
     'ingest/persists/count': {**INGEST_METRIC},
+    'ingest/persists/cpu': {**SKIP_METRIC},
     'ingest/persists/failed': {**INGEST_METRIC},
     'ingest/persists/time': {**INGEST_TIME_METRIC},
     'ingest/rows/output': {**INGEST_METRIC},
@@ -193,6 +195,9 @@ class DruidCollector(object):
             'overlord': {
                 **JETTY_METRICS,
                 **INGEST_METRICS,
+            },
+            'middlemanager': {
+                **JETTY_METRICS,
             },
             'peon': {
                 **JETTY_METRICS,
