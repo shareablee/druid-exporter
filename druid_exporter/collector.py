@@ -157,7 +157,7 @@ INGEST_METRICS = {
     'ingest/events/unparseable': {**INGEST_METRIC},
     'ingest/handoff/count': {**INGEST_METRIC},
     'ingest/handoff/failed': {**INGEST_METRIC},
-    'ingest/kafka/lag': {**INGEST_METRIC, 'suffix': '_size'},
+    'ingest/kafka/lag': {'labels': ['dataSource'], 'suffix': '_size'},
     'ingest/merge/cpu': {**SKIP_METRIC},
     'ingest/merge/time': {**INGEST_TIME_METRIC},
     'ingest/persists/backPressure': {**INGEST_TIME_METRIC},
