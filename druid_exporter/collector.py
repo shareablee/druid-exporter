@@ -269,7 +269,7 @@ class DruidCollector(object):
 
         metric_name = self._get_metric_name(daemon, metric_name, config)
         metric_value = float(datapoint['value'])
-        metric_labels = tuple(sorted(config['labels']))
+        metric_labels = tuple(sorted(config['labels'] + ['host']))
         label_values = tuple([datapoint[label_name] for label_name in metric_labels])
 
         if '_metric_' not in config:
