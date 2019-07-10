@@ -210,6 +210,14 @@ INDEXING_SERVICE_METRICS = {
     'segment/added/bytes': {'labels': ['dataSource', 'taskType'], 'type': 'counter'},
 }
 
+TASK_METRICS = {
+    'task/success/count': {**INGEST_METRIC},
+    'task/failed/count': {**INGEST_METRIC},
+    'task/running/count': {**INGEST_METRIC},
+    'task/pending/count': {**INGEST_METRIC},
+    'task/waiting/count': {**INGEST_METRIC}
+}
+
 class DruidCollector(object):
     datapoints_processed = Counter('druid_exporter_datapoints_processed_count', '')
 
@@ -241,6 +249,7 @@ class DruidCollector(object):
                 **JETTY_METRICS,
                 **INGEST_METRICS,
                 **INDEXING_SERVICE_METRICS,
+                **TASK_METRICS,
             },
             'middlemanager': {
                 **JETTY_METRICS,
