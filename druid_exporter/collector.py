@@ -174,6 +174,14 @@ INGEST_METRICS = {
     'ingest/sink/count': {**INGEST_METRIC},
 }
 
+TASK_METRICS = {
+    'task/success/count': {**INGEST_METRIC},
+    'task/failed/count': {**INGEST_METRIC},
+    'task/running/count': {**INGEST_METRIC},
+    'task/pending/count': {**INGEST_METRIC},
+    'task/waiting/count': {**INGEST_METRIC}
+}
+
 class DruidCollector(object):
     datapoints_processed = Counter('druid_exporter_datapoints_processed_count', '')
 
@@ -201,6 +209,7 @@ class DruidCollector(object):
             'overlord': {
                 **JETTY_METRICS,
                 **INGEST_METRICS,
+                **TASK_METRICS,
             },
             'middlemanager': {
                 **JETTY_METRICS,
