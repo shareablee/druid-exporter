@@ -211,11 +211,11 @@ INDEXING_SERVICE_METRICS = {
 }
 
 TASK_METRICS = {
-    'task/success/count': {**INGEST_METRIC},
-    'task/failed/count': {**INGEST_METRIC},
-    'task/running/count': {**INGEST_METRIC},
-    'task/pending/count': {**INGEST_METRIC},
-    'task/waiting/count': {**INGEST_METRIC}
+    'task/success/count': {'labels': ['dataSource'], 'suffix': ''},
+    'task/failed/count': {'labels': ['dataSource'], 'suffix': ''},
+    'task/running/count': {'labels': ['dataSource'], 'suffix': ''},
+    'task/pending/count': {'labels': ['dataSource'], 'suffix': ''},
+    'task/waiting/count': {'labels': ['dataSource'], 'suffix': ''}
 }
 
 class DruidCollector(object):
