@@ -67,6 +67,22 @@ JETTY_METRICS = {
     'jetty/numOpenConnections': {},
 }
 
+JVM_METRICS = {
+    'jvm/pool/committed': {},
+    'jvm/pool/init': {},
+    'jvm/pool/max': {},
+    'jvm/pool/used': {},
+    'jvm/bufferpool/count': {},
+    'jvm/bufferpool/used': {},
+    'jvm/bufferpool/capacity': {},
+    'jvm/mem/init': {},
+    'jvm/mem/max': {},
+    'jvm/mem/used': {},
+    'jvm/mem/committed': {},
+    'jvm/gc/count': {},
+    'jvm/gc/cpu': {}
+}
+
 QUERY_METRICS = {
     'query/bytes': {'labels': ['type', 'dataSource'], 'type': 'summary'},
     'query/cpu/time': {**QUERY_TIME_SUMMARY_METRIC},
@@ -188,10 +204,12 @@ class DruidCollector(object):
     def __init__(self):
         self.supported_metrics = {
             'coordinator': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **SEGMENT_COORDINATOR_METRICS,
             },
             'broker': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **QUERY_METRICS,
                 **QUERY_CACHE_METRICS,
@@ -200,6 +218,7 @@ class DruidCollector(object):
                 **SEGMENT_METRICS,
             },
             'historical': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **QUERY_METRICS,
                 **QUERY_CACHE_METRICS,
@@ -207,14 +226,17 @@ class DruidCollector(object):
                 **SEGMENT_METRICS,
             },
             'overlord': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **INGEST_METRICS,
                 **TASK_METRICS,
             },
             'middlemanager': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
             },
             'peon': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **QUERY_METRICS,
                 **QUERY_CACHE_METRICS,
@@ -223,6 +245,7 @@ class DruidCollector(object):
                 **SEGMENT_METRICS,
             },
             'realtime': {
+                **JVM_METRICS,
                 **JETTY_METRICS,
                 **QUERY_METRICS,
                 **QUERY_CACHE_METRICS,
